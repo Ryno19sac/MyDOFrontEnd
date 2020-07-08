@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.json",
+  "angularCompilerOptions": {
+    "enableIvy": false
+  },
+  "compilerOptions": {
+    "outDir": "../../dist/out-tsc/apps/biblioveda",
+    "types": [
+    ]
+  },
+  "files": [
+    "src/main.ts",
+    "src/polyfills.ts"
+  ],
+  "include": ["**/*.d.ts"]
+}

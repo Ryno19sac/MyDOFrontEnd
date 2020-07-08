@@ -1,0 +1,70 @@
+<div *ngIf="!(isLoading || isFormLoading); else loading_templ">
+    <mat-toolbar>
+        <mat-toolbar-row>
+            <app-organization-breadcrumb [organization]="organization" title="Edit"></app-organization-breadcrumb>
+        </mat-toolbar-row>
+    </mat-toolbar>
+    <div class="form-container">
+        <form [formGroup]="organizationForm" novalidate>
+            <mat-form-field>
+                <label>
+                    <input matInput placeholder="Organization Name" type="text" formControlName="organizationName"
+                           required>
+                </label>
+                <mat-error *ngIf="organizationForm.get('organizationName').hasError('required')">
+                    <ng-container>Organization name is required</ng-container>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Invitation Email" type="text" formControlName="invitationEmail" required>
+                <mat-error *ngIf="organizationForm.get('invitationEmail').hasError('required')">
+                    <ng-container>Invitation Email is required</ng-container>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Initialization Fee in US Dollars" type="text" formControlName="initializationFee" required>
+                <mat-error *ngIf="organizationForm.get('initializationFee').hasError('required')">
+                    <ng-container>Initialization Fee is required</ng-container>
+                </mat-error>
+                <mat-error *ngIf="organizationForm.get('initializationFee').hasError('min')">
+                    <ng-container>Fee must be at least $1.00</ng-container>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Yearly Subscription Fee in US Dollars" type="text" formControlName="subscriptionFee" required>
+                <mat-error *ngIf="organizationForm.get('subscriptionFee').hasError('required')">
+                    <ng-container>Subscription Fee is required</ng-container>
+                </mat-error>
+                <mat-error *ngIf="organizationForm.get('subscriptionFee').hasError('min')">
+                    <ng-container>Subscription must be at least $1.00</ng-container>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <label>
+                    <input matInput placeholder="Client ID" type="text" formControlName="clientId">
+                </label>
+            </mat-form-field>
+            <mat-form-field>
+                <label>
+                    <input matInput placeholder="Client Secret" type="text" formControlName="clientSecret">
+                </label>
+            </mat-form-field>
+            <mat-checkbox formControlName="status">Active</mat-checkbox>
+            <br>
+            <br>
+            <div class="button-row-right">
+                <button mat-raised-button color="accent" (click)="cancel()" i18n="@@shared_cancel">Cancel</button>
+                <button mat-raised-button color="primary" [disabled]="organizationForm.invalid"
+                        (click)="saveOrganization()">
+                    <ng-container i18n="@@shared_save">Save</ng-container>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<ng-template #loading_templ>
+    <div class="flex-container">
+        <mat-spinner></mat-spinner>
+    </div>
+</ng-template>

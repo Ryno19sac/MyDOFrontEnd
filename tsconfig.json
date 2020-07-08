@@ -1,0 +1,7 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "types": ["node", "jest", "stripe-v3"]
+  },
+  "include": ["**/*.ts"]
+}

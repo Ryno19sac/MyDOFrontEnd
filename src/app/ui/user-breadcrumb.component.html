@@ -1,0 +1,7 @@
+<span class="breadcrumb">
+    <a routerLink="/organizations">Organizations </a> /
+    <a routerLink="/organizations" class="name">{{ getOrganization().name }}</a> /
+    <ng-container><a routerLink="/users">Users</a></ng-container>
+    <ng-container *ngIf="user"> / <a routerLink="/users/{{ user?.id }}" class="name">{{ user?.firstName }} {{user?.lastName}}</a></ng-container>
+    <ng-container *ngIf="title"> / {{ title }}</ng-container>
+</span>

@@ -1,0 +1,71 @@
+<mat-card id='mainTitle'>MyDO Journal</mat-card>
+<mat-drawer-container class="sideContainer">
+  <mat-drawer class = 'homePageContents' mode="side" opened>
+      <!-- <div>
+          <button mat-stroked-button color= 'primary' class='navButton' routerLink="/birthdays" routerLinkActive="app-sidenav-item-selected">
+              Birthdays
+          </button> 
+      </div> -->
+      <div>
+          <button mat-stroked-button color= 'primary' class='navButton' routerLink="/todo" routerLinkActive="app-sidenav-item-selected">
+              Todos
+          </button> 
+      </div>
+      <!-- <div >
+          <button mat-stroked-button color='primary' class='navButton' routerLink="/stocks" routerLinkActive="app-sidenav-item-selected"> 
+              Stocks
+          </button>
+      </div> -->
+      <div >
+          <button mat-stroked-button color= 'primary' class='navButton' routerLink="/rituals" routerLinkActive="app-sidenav-item-selected">
+              Rituals
+          </button>
+      </div>
+      <div >
+          <button mat-stroked-button color= 'primary' 
+          (click)= 'logout()'
+          class='navButton' 
+          routerLink="/login" 
+          routerLinkActive="app-sidenav-item-selected">
+              Logout
+          </button>
+      </div>
+  </mat-drawer>
+<!-- <mat-card-content>
+    <div class="example-button-container">
+        <button class='homeButton'
+        routerLink='/todo' 
+        mat-icon-button-color='primary' 
+        mat-fab aria-label="Example icon button with a home icon">
+          <mat-icon>home</mat-icon>
+        </button>
+    </div>
+</mat-card-content> -->
+<mat-drawer-content class='displayComponents'>
+  <mat-card id='mainPage'>
+    <mat-card-title id='journalTitle'>Your DO Journal</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]='newEntry' class="journal">
+        <mat-form-field class="currentDate" appearance="fill">
+          <mat-label>Entry Date</mat-label>
+          <input formControlName='entryDate' id='datePicker' matInput placeholder="mm/dd/yyyy">
+          <!-- <mat-datepicker-toggle matSuffix [for]="picker">
+            <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+          </mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker> -->
+        </mat-form-field>
+        
+        <mat-form-field class="journalEntry">
+          <mat-label>What's on your mind</mat-label>
+          <textarea formControlName='entry' matInput placeholder="Ex. It makes me feel..."></textarea>
+        </mat-form-field>
+      </form>
+      <button (click)='addEntry()' mat-raised-button color="primary">Add Entry</button>
+    </mat-card-content>
+    </mat-card>
+    <mat-card *ngFor='let entry of addEntry()'>
+      <h3>{{entry}}</h3>
+      <!-- <p>{{entry.entry}}</p> -->
+    </mat-card>
+    </mat-drawer-content>
+    </mat-drawer-container>

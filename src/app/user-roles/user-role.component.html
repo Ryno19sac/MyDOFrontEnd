@@ -1,0 +1,58 @@
+<div *ngIf="userRole; else loading_templ">
+  <mat-toolbar>
+    <app-user-role-breadcrumb [userRole]="userRole"></app-user-role-breadcrumb>
+    <!-- This fills the remaining space of the current row -->
+    <span class="spacer"></span>
+    <mat-menu #appMenu="matMenu">
+      <button mat-menu-item routerLink="/user-roles/{{ userRole.id }}/edit">
+        <mat-icon>mode_edit</mat-icon>
+        <span matTooltip="Edit User Role">Edit</span>
+      </button>
+      <button mat-menu-item routerLink="/user-roles/{{ userRole.id }}/delete">
+        <mat-icon>delete</mat-icon>
+        <span matTooltip="Delete User Role">Delete</span>
+      </button>
+    </mat-menu>
+    <button mat-icon-button [matMenuTriggerFor]="appMenu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <mat-card>
+    <mat-card-content>
+      <table>
+        <tr>
+          <th></th>
+          <th>VIEW</th>
+          <th>EDIT</th>
+          <th>CREATE</th>
+          <th>DELETE</th>
+        </tr>
+        <tr *ngFor="let permission of permissions">
+          <td>
+            {{ permission.category }}
+          </td>
+          <td>
+            <mat-icon class="icon-success" *ngIf="permission.viewPermission?.status">check_circle</mat-icon>
+          </td>
+          <td>
+            <mat-icon class="icon-success" *ngIf="permission.editPermission?.status">check_circle</mat-icon>
+          </td>
+          <td>
+            <mat-icon class="icon-success" *ngIf="permission.createPermission?.status">check_circle</mat-icon>
+          </td>
+          <td>
+            <mat-icon class="icon-success" *ngIf="permission.deletePermission?.status">check_circle</mat-icon>
+          </td>
+        </tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<ng-template #loading_templ>
+  <div class="flex-container">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>
+

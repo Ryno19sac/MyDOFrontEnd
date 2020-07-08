@@ -1,0 +1,77 @@
+<div *ngIf="userRole; else loading_templ" class="mat-elevation-z8">
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <app-user-role-breadcrumb [userRole]="userRole" title="Edit"></app-user-role-breadcrumb>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div class="form-container">
+    <form [formGroup]="userRoleForm" novalidate>
+      <mat-form-field>
+        <input matInput placeholder="Name" i18n-placeholder="@@shared_name" type="name" formControlName="name"
+               required="true">
+        <mat-error *ngIf="userRoleForm.get('name').hasError('required')">
+          <ng-container i18n="@@shared_err_name_required">Name is required</ng-container>
+        </mat-error>
+        <mat-error *ngIf="userRoleForm.get('name').hasError('notBlank')">
+          <ng-container i18n="@@users_err_name_cannot_be_spaces">Name cannot just be spaces</ng-container>
+        </mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+      <textarea matInput matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5" placeholder="Description"
+                i18n-placeholder="@@shared_description" type="text" formControlName="description"></textarea>
+      </mat-form-field>
+      <br>
+      <br>
+      <h3>Specific Permissions</h3>
+      <table>
+        <tr>
+          <th></th>
+          <th>VIEW</th>
+          <th>EDIT</th>
+          <th>CREATE</th>
+          <th>DELETE</th>
+        </tr>
+        <tr *ngFor="let permission of permissions">
+          <td>
+            {{permission.category}}
+          </td>
+          <td>
+            <mat-checkbox matInput [formControlName]="permission.viewPermission.slug"
+                          *ngIf="permission.viewPermission"></mat-checkbox>
+          </td>
+          <td>
+            <mat-checkbox matInput [formControlName]="permission.editPermission.slug"
+                          *ngIf="permission.editPermission"></mat-checkbox>
+          </td>
+          <td>
+            <mat-checkbox matInput [formControlName]="permission.createPermission.slug"
+                          *ngIf="permission.createPermission"></mat-checkbox>
+          </td>
+          <td>
+            <mat-checkbox matInput [formControlName]="permission.deletePermission.slug"
+                          *ngIf="permission.deletePermission"></mat-checkbox>
+          </td>
+        </tr>
+      </table>
+      <br>
+      <mat-checkbox placeholder="Is Active" i18n-placeholder="@@shared_is_active" matInput formControlName="active">Is
+        Active
+      </mat-checkbox>
+      <br>
+      <br>
+      <div class="button-row-right">
+        <button mat-raised-button color="accent" (click)="cancel()" i18n="@@shared_cancel">Cancel</button>
+        <button mat-raised-button color="primary" [disabled]="userRoleForm.invalid" (click)="saveUserRole()"
+                i18n="@@shared_save">Save
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<ng-template #loading_templ>
+  <div class="flex-container">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

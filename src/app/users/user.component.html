@@ -1,0 +1,55 @@
+<div *ngIf="user; else loading_templ">
+    <mat-toolbar>
+        <biblioveda-app-user-breadcrumb [user]="user"></biblioveda-app-user-breadcrumb>
+        <!-- This fills the remaining space of the current row -->
+        <span class="spacer"></span>
+        <mat-menu #appMenu="matMenu">
+            <button mat-menu-item routerLink="/users/{{ user.id }}/edit">
+                <mat-icon>mode_edit</mat-icon>
+                <span matTooltip="Edit Profile">Edit</span>
+            </button>
+            <button mat-menu-item routerLink="/users/{{ user.id }}/delete">
+                <mat-icon>delete</mat-icon>
+                <span matTooltip="Delete Profile">Delete</span>
+            </button>
+        </mat-menu>
+        <button mat-icon-button [matMenuTriggerFor]="appMenu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+    </mat-toolbar>
+    <mat-card>
+        <mat-card-content>
+            <mat-list>
+                <mat-list-item>
+                    <mat-icon>account_circle</mat-icon>
+                    {{ user.firstName }} {{ user.lastName }}
+                </mat-list-item>
+                <mat-list-item>
+                    <mat-icon>email</mat-icon>
+                    {{ user.email }}
+                </mat-list-item>
+                <mat-list-item>
+                    <mat-icon>vpn_key</mat-icon>
+                    {{ user.clientId }}
+                </mat-list-item>
+                <!--            <mat-list-item>-->
+                <!--              <mat-icon>access_time</mat-icon>-->
+                <!--              <ng-container i18n="@@users_last_login">Last Login</ng-container>-->
+                <!--              :&nbsp;{{user.updated | date}}-->
+                <!--            </mat-list-item>-->
+                <!--            <mat-list-item>-->
+                <!--              <mat-icon>create</mat-icon>-->
+                <!--              <ng-container i18n="@@users_created_on">Created On</ng-container>-->
+                <!--              :&nbsp;{{user.created | date}}-->
+                <!--            </mat-list-item>-->
+            </mat-list>
+        </mat-card-content>
+    </mat-card>
+    <app-user-role [userRole]="user?.userRole"></app-user-role>
+</div>
+
+<ng-template #loading_templ>
+    <div class="flex-container">
+        <mat-spinner></mat-spinner>
+    </div>
+</ng-template>

@@ -1,0 +1,75 @@
+<div *ngIf="!isLoading; else loading_templ">
+    <mat-toolbar>
+        <app-organization-breadcrumb [title]="organization.name"></app-organization-breadcrumb>
+        <!-- This fills the remaining space of the current row -->
+        <span class="spacer"></span>
+        <mat-menu #appMenu="matMenu">
+            <!--      <button mat-menu-item (click)="gotoLocations(organization)"-->
+            <!--              *ngIf="authService.hasPermissions(['hasOrganizationView', 'hasLocationView'])">-->
+            <!--        <mat-icon>table</mat-icon>-->
+            <!--        <ng-container i18n="@@shared_view">Locations</ng-container>-->
+            <!--      </button>-->
+            <button mat-menu-item (click)="gotoEdit(organization)"
+                    *ngIf="authService.hasPermission('hasOrganizationEdit')">
+                <mat-icon>mode_edit</mat-icon>
+                <ng-container i18n="@@shared_edit">Edit</ng-container>
+            </button>
+            <button mat-menu-item (click)="deleteOrganization(organization)"
+                    *ngIf="authService.hasPermission('hasOrganizationDelete')">
+                <mat-icon>delete</mat-icon>
+                <ng-container i18n="@@shared_delete">Delete</ng-container>
+            </button>
+        </mat-menu>
+        <button mat-icon-button [matMenuTriggerFor]="appMenu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+    </mat-toolbar>
+    <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="10px">
+        <mat-card>
+            <mat-card-content>
+                <mat-list>
+                    <mat-list-item>
+                        <mat-icon>account_balance</mat-icon>
+                        <b>Organization Name:</b>&nbsp; {{  organization.name }}
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon>account_circle</mat-icon>
+                        <b>Client ID:</b>&nbsp; {{ organization.clientId }}
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon>vpn_key</mat-icon>
+                        <b>Client Secret:</b>&nbsp; {{ organization.clientSecret }}
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon>attach_money</mat-icon>
+                        <b>Initialization Fee:</b>&nbsp; ${{ organization.initializationFee }} US Dollars
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon>attach_money</mat-icon>
+                        <b>Subscription Fee:</b>&nbsp; ${{ organization.subscriptionFee }} US Dollars
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon>visibility</mat-icon>
+                        <b>Status:</b>&nbsp; {{ organization.active | active }}
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon>restore</mat-icon>
+                        <b>Created:</b>&nbsp; {{ organization.created | date:'long' }}
+                    </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon>restore</mat-icon>
+                        <b>Modified:</b>&nbsp; {{ organization.modified | date:'long' }}
+                    </mat-list-item>
+                </mat-list>
+            </mat-card-content>
+        </mat-card>
+        
+    </div>
+</div>
+
+<ng-template #loading_templ>
+    <div class="flex-container">
+        <mat-spinner></mat-spinner>
+    </div>
+</ng-template>
+

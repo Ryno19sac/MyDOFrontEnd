@@ -1,0 +1,41 @@
+<mat-card id='mainTitle'>MyDO Birthdays</mat-card>
+<mat-card-content>
+    <div class="example-button-container">
+        <button class='homeButton'
+        routerLink='/todo' 
+        mat-icon-button-color='warn' 
+        mat-fab aria-label="Example icon button with a home icon">
+          <mat-icon>home</mat-icon>
+        </button>
+    </div>
+</mat-card-content>
+    
+    <mat-card class="birthdayInfo">
+        <form >
+            <mat-form-field class="birthdayName">
+                <mat-label>Whose Birthday?</mat-label>
+                <input matInput placeholder="Mom">
+        </mat-form-field>
+        <mat-form-field class="birthdayDate" appearance="fill">
+            <mat-label>Choose a Birthday</mat-label>
+            <input matInput [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker">
+                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+            </mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </form>
+    <div class='birthdaySubmit'>
+        <button 
+            mat-mini-fab color="accent"
+            class='enterInput' 
+            (click)='createBirthday()'
+            >
+            <!-- &times; -->
+            HBD!
+        </button>
+</div>
+</mat-card>
+
+
+<!-- <mat-form-field class='birthdayName'>hre</mat-form-field> -->

@@ -1,0 +1,195 @@
+.example-button-container {
+    display: flex;
+    justify-content: center;
+    width: 120px;
+  }
+
+  #mainTitle{
+    color: whitesmoke;
+    text-align: left;
+    background-color: dimgray;
+    border-radius: 0rem;
+    font-size: xx-large;
+    padding: 2rem;
+    padding-left: 5rem
+}
+
+.example-button-container {
+    background-color: dimgray;
+    padding: .4rem;
+    margin-top: 1rem
+}
+
+.ritual-input {
+    text-align: left;
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.5em 1em;
+}
+
+// .ritual-item-left {
+//     font-size: 1.5rem;
+//     background-color: lightyellow;
+//     border-radius: 1rem;
+//     margin: .3rem
+
+// }
+
+#ritualCard {
+    background-color: seashell;
+    margin: .3rem
+}
+
+.ritualButton {
+ margin: .3rem;
+}
+
+.navButton {
+    background-color: deepskyblue;
+    margin-right: 1rem;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    border-color: darkblue;
+    border-style: double; 
+    color: darkblue;
+    text-align: center;
+    width: 75%
+}
+
+.homePageContents {
+    background-color: dimgrey;
+}
+
+
+
+.displayComponents {
+    padding-left: 12rem;
+    padding-top: 3rem;
+    padding-right: 15rem;
+    background: linear-gradient(to right, hsla(200, 40%, 80%, 0.75), hsla(200,40%,80%,0.8)), url("https://4.bp.blogspot.com/--Stb8VPWjfU/VXsD3QBUnyI/AAAAAAAAIBs/_XBfEPvW6nA/s1600/organized-desk.jpg");
+    background-size: auto;
+    height: 100vh
+
+
+}
+
+// .extra-container {
+//     padding-top: 2rem
+// }
+
+.ritualContainer {
+    padding-top: 0rem;
+    margin: 5rem;
+    margin-right: 5rem;
+    text-align: left
+}
+
+.updateButton {
+    margin-left: 8px
+}
+
+.ritual-item-edit {
+    text-align: left;
+    width: 90%;
+    padding: 0.5em 1em;
+}
+
+.ritual-item {
+    padding-left: 1rem;
+    padding-top: 0rem;
+    padding-bottom: 0;
+    font-size: 1.5rem;
+    background-color: lightskyblue;
+    text-align: left;
+    opacity: 95%;
+    border-radius: 4px;
+    margin-bottom: .5rem;
+    margin-top: .5rem;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    // padding: 1em;
+    justify-content: space-between;
+    box-shadow: 0 1px 1px hsl(200,30%,50%);
+    
+}
+        // .ritual-item {
+        //     padding-left: .8rem;
+        //     padding-top: .3rem;
+        //     font-size: 1.5rem;
+        //     background-color: lightskyblue;
+        //     text-align: center;
+        //     opacity: 95%;
+        //     border-radius: 4px;
+        //     margin-bottom: .5rem;
+        //     margin-top: .5rem;
+        //     padding-bottom: 0;
+        // }
+
+#mainPage {
+    margin-right: 3rem;
+    font-size: 1.5rem;
+    opacity: 100%;
+    text-align: center;
+    background-color: seashell
+
+}
+
+#ritualTitle {
+    text-align: left
+}
+
+.ritualButton {
+    margin: 1rem
+}
+
+.remove-item {
+    margin: .5rem
+}
+
+
+.ritualContainer {
+    padding-top: 0rem;
+    margin: 5rem;
+    margin-right: 5rem;
+    text-align: center
+}
+
+
+.ritual-input {
+    width: -webkit-fill-available;
+    text-align: left;
+    margin-bottom: 0.2rem
+    // margin-left: 20rem;
+    // margin-right: 20rem
+}
+
+#mainPage {
+    margin-right: 3rem;
+    font-size: 1.5rem;
+    opacity: 100%;
+    text-align: center;
+    background-color: seashell
+
+
+}
+
+#ritualsTitle {
+    text-align: left
+}
+
+.ritualButton {
+    margin: .1rem
+}
+
+.remove-item {
+    margin: .5rem
+}
+
+
+
+
+// #xButton {
+//     margin-bottom: .5rem
+// }

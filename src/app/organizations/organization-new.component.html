@@ -1,0 +1,61 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <app-organization-breadcrumb title="New"></app-organization-breadcrumb>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="form-container">
+  <form [formGroup]="organizationForm" novalidate>
+    <mat-form-field appearance="outline">
+      <mat-label>Organization Name</mat-label>
+      <mat-icon matPrefix>local_library</mat-icon>
+      <input matInput type="text" formControlName="name" required>
+      <mat-error *ngIf="organizationForm.get('name').hasError('required')">
+        <ng-container>Name is required</ng-container>
+      </mat-error>
+    </mat-form-field>
+    <!--Email Field-->
+    <mat-form-field appearance="outline">
+      <mat-label>Invitation Email</mat-label>
+      <mat-icon matPrefix>email</mat-icon>
+      <mat-icon matSuffix *ngIf="organizationForm.get('invitationEmail').hasError('emailTaken')">report_problem
+      </mat-icon>
+      <input matInput type="email" formControlName="invitationEmail" required maxlength="256">
+      <mat-hint align="start">This email will be your login</mat-hint>
+      <mat-error *ngIf="organizationForm.get('invitationEmail').hasError('required')">
+        <ng-container>Invitation email is required</ng-container>
+      </mat-error>
+      <mat-error *ngIf="organizationForm.get('invitationEmail').hasError('emailTaken')">
+        <ng-container>Email address already exists in system! Please enter a different email address.</ng-container>
+      </mat-error>
+      <mat-error *ngIf="organizationForm.get('invitationEmail').hasError('email')">
+        <ng-container>Invalid email address. Must be in the format: email@biblioveda.com</ng-container>
+      </mat-error>
+      <mat-error *ngIf="organizationForm.get('invitationEmail').hasError('maxlength')">
+        <ng-container>Email must be less than 256 characters.</ng-container>
+      </mat-error>
+      <mat-hint align="end">{{ organizationForm.get('invitationEmail').value.length }} / 256</mat-hint>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Initialization Fee in US Dollars</mat-label>
+      <mat-icon matPrefix>attach_money</mat-icon>
+      <input matInput type="text" formControlName="initializationFee" required>
+      <mat-error *ngIf="organizationForm.get('initializationFee').hasError('required')">
+        <ng-container>Initialization Fee is required</ng-container>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Yearly Subscription Fee in US Dollars</mat-label>
+      <mat-icon matPrefix>attach_money</mat-icon>
+      <input matInput type="text" formControlName="subscriptionFee" required>
+      <mat-error *ngIf="organizationForm.get('subscriptionFee').hasError('required')">
+        <ng-container>Subscription Fee is required</ng-container>
+      </mat-error>
+    </mat-form-field>
+    <br>
+    <br>
+    <div class="button-row-right">
+      <button mat-raised-button color="accent" (click)="cancel()">Cancel</button>
+      <button mat-raised-button color="primary" [disabled]="organizationForm.invalid" (click)="saveOrganization()">Save & Send Invitation</button>
+    </div>
+  </form>
+</div>

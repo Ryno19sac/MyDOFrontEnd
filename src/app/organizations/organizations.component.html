@@ -1,0 +1,81 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <app-organization-breadcrumb></app-organization-breadcrumb>
+    <span class="spacer"></span>
+    <button mat-raised-button color="primary" routerLink="/organizations/new"
+            *ngIf="authService.hasPermission('hasOrganizationCreate')">New Organization
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="search-box">
+  <mat-form-field floatLabel="never" class="app-input-no-underline">
+    <mat-icon matPrefix>search</mat-icon>
+    <input matInput #searchInput placeholder="Search">
+  </mat-form-field>
+</div>
+<mat-card>
+  <div class="loading-shade" *ngIf="dataSource.loading$ | async">
+    <mat-spinner></mat-spinner>
+  </div>
+  <mat-card-content>
+    <table mat-table [dataSource]="dataSource" matSort aria-label="organizations">
+      <!-- Number Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let organization" (click)="gotoDetail(organization)">{{ organization.name }}</td>
+      </ng-container>
+      <ng-container matColumnDef="stripeId">
+        <th mat-header-cell *matHeaderCellDef>Stripe Customer ID</th>
+        <td mat-cell *matCellDef="let organization" (click)="gotoDetail(organization)">{{ organization.stripeCustomerId }}</td>
+      </ng-container>
+      <ng-container matColumnDef="active">
+        <th mat-header-cell *matHeaderCellDef>Active</th>
+        <td mat-cell *matCellDef="let organization" (click)="gotoDetail(organization)">
+          <mat-icon class="icon-success" *ngIf="organization.active">check_circle</mat-icon>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="modified">
+        <th mat-header-cell *matHeaderCellDef>Last Updated</th>
+        <td mat-cell *matCellDef="let organization" (click)="gotoDetail(organization)">{{ organization.modified }}</td>
+      </ng-container>
+
+      <!-- menu -->
+      <ng-container matColumnDef="menu">
+        <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
+        <td mat-cell *matCellDef="let organization">
+          <!-- This fills the remaining space of the current row -->
+          <mat-menu #appMenu="matMenu">
+            <button mat-menu-item (click)="gotoDetail(organization)" *ngIf="authService.hasPermission('hasOrganizationView')">
+              <mat-icon>account_circle</mat-icon>
+              <ng-container i18n="@@shared_view">View</ng-container>
+            </button>
+<!--            <button mat-menu-item (click)="gotoLocations(organization)"-->
+<!--                    *ngIf="authService.hasPermissions(['hasOrganizationView', 'hasLocationView'])">-->
+<!--              <mat-icon>table</mat-icon>-->
+<!--              <ng-container i18n="@@shared_view">Locations</ng-container>-->
+<!--            </button>-->
+            <button mat-menu-item (click)="gotoEdit(organization)" *ngIf="authService.hasPermission('hasOrganizationEdit')">
+              <mat-icon>mode_edit</mat-icon>
+              <ng-container i18n="@@shared_edit">Edit</ng-container>
+            </button>
+            <button mat-menu-item (click)="deleteOrganization(organization)" *ngIf="authService.hasPermission('hasOrganizationDelete')">
+              <mat-icon>delete</mat-icon>
+              <ng-container i18n="@@shared_delete">Delete</ng-container>
+            </button>
+          </mat-menu>
+          <button mat-icon-button [matMenuTriggerFor]="appMenu" style="float: right">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let organization; columns: displayedColumns;" [ngClass]="{highlight: isHighlighted(organization)}" on-mouseover="highlight(organization)"></tr>
+    </table>
+
+    <mat-paginator [length]="dataSource.resultsLength"
+                   [pageIndex]="0"
+                   [pageSize]="10"
+                   [pageSizeOptions]="[10, 25, 50, 100, 250]">
+    </mat-paginator>
+  </mat-card-content>
+</mat-card>

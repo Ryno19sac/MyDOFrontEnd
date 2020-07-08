@@ -1,0 +1,105 @@
+<mat-card id='mainTitle'>MyDO Todos</mat-card>
+<mat-drawer-container class="sideContainer">
+    <mat-drawer class = 'homePageContents' mode="side" opened>
+        <!-- <div>
+            <button mat-stroked-button color= 'primary' class='navButton' routerLink="/birthdays" routerLinkActive="app-sidenav-item-selected">
+                Birthdays
+            </button> 
+        </div> -->
+        <div>
+            <button mat-stroked-button color= 'primary' class='navButton' routerLink="/rituals" routerLinkActive="app-sidenav-item-selected">
+                Rituals
+            </button> 
+        </div>
+        <!-- <div >
+            <button mat-stroked-button color='primary' class='navButton' routerLink="/stocks" routerLinkActive="app-sidenav-item-selected"> 
+                Stocks
+            </button>
+        </div> -->
+        <div >
+            <button mat-stroked-button color= 'primary' class='navButton' routerLink="/journal" routerLinkActive="app-sidenav-item-selected">
+                Journal
+            </button>
+        </div>
+        <div >
+            <button mat-stroked-button color= 'primary' 
+            (click)= 'logout()'
+            class='navButton' 
+            routerLink="/login" 
+            routerLinkActive="app-sidenav-item-selected">
+                Logout
+            </button>
+        </div>
+    </mat-drawer>
+    <mat-drawer-content class='displayComponents'>
+        <mat-card id='mainPage'>
+            <!-- <h3>Today's date is July 6, 2020</h3> -->
+            <mat-card-title id='todoTitle'>Your MyDO ToDos</mat-card-title>
+            <mat-card-content>
+                <form [formGroup]="newTodo">
+                    <input type='text' class='todo-input' placeholder="What needs to get done?" formControlName="todoTitle">
+                    <button mat-mini-fab color="primary" (click)='addTodo()'>Add</button>
+                    <div class='todo-item' *ngFor='let todo of todosFiltered()' @fade>
+                        <div class ='todo-item-left'>
+                        <!-- <input id='selectAllBox' 
+                        type='checkbox'
+                        > -->
+                        <div 
+                        *ngIf= '!todo.editing; else editingTodo' class='todo-item-label completed' 
+                        [ngClass]="{'completed' : todo.completed}" 
+                        (dblclick)='editTodo(todo)'
+                        >{{ todo.title }}
+                    </div>
+                    <ng-template #editingTodo>
+                        <input 
+                        type='text' 
+                        class='todo-item-edit' 
+                        formControlName='todoTitle' 
+                        (blur)="doneEdit(todo)" 
+                        (keyup.enter)="doneEdit(todo)" 
+                        (keyup.esc)="cancelEdit(todo)" 
+                        autofocus>
+                        <button class="updateButton"mat-mini-fab color="primary" (click)='doneEdit()'>✅</button>
+                    </ng-template>
+                </div>
+                <div>
+                    <button 
+                    mat-mini-fab color="primary"
+                    class='remove-item' 
+                    (click)='deleteTodo(todo.id)'>
+                    <!-- &times; -->
+                    DONE
+                </button>
+            </div>
+        </div>
+    </form>
+            
+        </mat-card-content>
+        
+        <div class='extra-container'>
+            <div>
+                <button 
+                class='todoButton' 
+                mat-raised-button color="primary" 
+                matBadge="{{ remaining() }}" 
+                matBadgeColor="accent" [ngClass]="{'active': filter ==='active'}" (click) ="filter='active'"
+                >Still ToDo
+            </button>
+            
+        </div>
+        <div *ngIf='atLeastOneCompleted()'>
+            <button mat-raised-button color="accent" (click)="clearCompleted">Clear Completed</button>
+        </div> 
+    </div>
+        </mat-card>  
+    </mat-drawer-content>
+</mat-drawer-container>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,612 @@
+@import '~@angular/material/theming';
+@import "themes/material-styles";
+@import "themes/material-snacker";
+
+//@include mat-core();
+
+//$light-blue: mat-palette($mat-light-blue, A400);
+//$red: mat-palette($mat-red);
+//$deep-orange: mat-palette($mat-deep-orange, A200);
+//$pink: mat-palette($mat-red, A100);
+//$crimson: mat-palette($mat-red, A400);
+//
+///*-- Dark Theme Colors --*/
+//$green-dark: mat-palette($mat-green, A400);
+//$indigo-dark: mat-palette($mat-indigo, A200);
+//$purple-dark: mat-palette($mat-purple, A700);
+//$amber-dark: mat-palette($mat-amber, A400);
+//$teal-dark: mat-palette($mat-teal, A400);
+//
+///*-- Light Theme Colors --*/
+//$green-light: mat-palette($mat-green, A700);
+//$indigo-light: mat-palette($mat-indigo, A400);
+//$purple-light: mat-palette($mat-purple, 700);
+//$amber-light: mat-palette($mat-amber, A700);
+//$teal-light: mat-palette($mat-teal, A700);
+//
+///*-- Default Theme --*/
+//$default-theme: mat-light-theme($light-blue, $green-light);
+//@include style-theme($default-theme);
+//@include angular-material-theme($default-theme);
+//
+//.biblioveda-light {
+//  $default-theme: mat-light-theme($light-blue, $green-light);
+//  @include style-theme($default-theme);
+//  @include angular-material-theme($default-theme);
+//}
+//
+//.light-blue {
+//  $default-theme: mat-light-theme($light-blue, $green-light);
+//  @include style-theme($default-theme);
+//  @include angular-material-theme($default-theme);
+//}
+//
+//.dark-green {
+//  $default-theme: mat-dark-theme($green-dark, $light-blue);
+//  @include style-theme($default-theme);
+//  @include angular-material-theme($default-theme);
+//}
+//
+//.dark-blue {
+//  $default-theme: mat-dark-theme($light-blue, $green-dark);
+//  @include style-theme($default-theme);
+//  @include angular-material-theme($default-theme);
+//}
+//
+//.dark-red {
+//  $default-theme: mat-dark-theme($red, $light-blue, $pink);
+//  @include style-theme($default-theme);
+//  @include angular-material-theme($default-theme);
+//}
+//
+//.dark-indigo {
+//  $default-theme: mat-dark-theme($indigo-dark, $deep-orange);
+//  @include style-theme($default-theme);
+//  @include angular-material-theme($default-theme);
+//}
+//
+//.dark-orange {
+//  $default-theme: mat-dark-theme($deep-orange, $indigo-dark);
+//  @include style-theme($default-theme);
+//  @include angular-material-theme($default-theme);
+//}
+//
+//.dark-purple {
+//  $default-theme: mat-dark-theme($purple-dark, $amber-dark);
+//  @include style-theme($default-theme);
+//  @include angular-material-theme($default-theme);
+//}
+//
+//.dark-amber {
+//  $default-theme: mat-dark-theme($amber-dark, $purple-dark);
+//  @include style-theme($default-theme);
+//  @include angular-material-theme($default-theme);
+//}
+//
+//.dark-crimson {
+//  $default-theme: mat-dark-theme($crimson, $teal-dark, $deep-orange);
+//  @include style-theme($default-theme);
+//  @include angular-material-theme($default-theme);
+//}
+//
+//.dark-teal {
+//  $default-theme: mat-dark-theme($teal-dark, $crimson, $deep-orange);
+//  @include style-theme($default-theme);
+//  @include angular-material-theme($default-theme);
+//}
+$small-breakpoint-width: 720px;
+/* For desktop, the content should be aligned with the page title. */
+$content-padding-side: 70px;
+$content-padding-side-xs: 15px;
+$sidenav-spacing-unit: 8px;
+$sidenav-width: 230px;
+
+// .MyDO-light.mat-topography {
+//   background-image: url(https://www.vectorstock.com/royalty-free-vector/office-workspace-background-coffee-tablet-vector-4659137)
+// }
+
+// .mat-card {
+//   border-style: solid
+// }
+.app-sidenav-container {
+  flex: 1;
+  height: 100%;
+}
+
+.app-sidenav {
+  padding-bottom: 72px;
+  width: $sidenav-width;
+  bottom: 0;
+  overflow: auto;
+  height: 100%;
+
+  // &.mat-sidenav-opened {
+  //   //box-shadow: 3px 0 6px rgba(0, 0, 0, .24);
+  // }
+
+  // Section divider
+  h3 {
+    border: none;
+    font-size: 10px;
+    letter-spacing: 1px;
+    line-height: $sidenav-spacing-unit * 3;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin: 0;
+    padding: 5px ($sidenav-spacing-unit * 2) 0;
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  // Sidenav navigation item
+  li {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    margin: 0;
+    padding: 0;
+
+    // Hide the border on the last item
+    &:last-child {
+      border-color: transparent;
+    }
+
+    > a {
+      box-sizing: border-box;
+      display: block;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: ($sidenav-spacing-unit * 6) - 1;
+      text-decoration: none;
+      transition: all .3s;
+      padding: 0 ($sidenav-spacing-unit * 2);
+      position: relative;
+
+      &.app-sidenav-item-selected {
+        font-weight: bolder;
+      }
+    }
+  }
+}
+
+.MyDO-app-component-sidenav-content {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  // The rule will match the element following the router-outlet which will be the routed component.
+  router-outlet + * {
+    flex-grow: 1;
+  }
+}
+
+@media (max-width: 720px) {
+  .app-sidenav-container {
+    flex: 1 0 auto;
+  }
+}
+
+.component-page-header {
+  display: flex;
+  align-items: center;
+
+  @media (max-width: $small-breakpoint-width) {
+    padding-left: 0;
+  }
+}
+
+h1 {
+  outline: none;
+
+  @media (max-width: $small-breakpoint-width) {
+    padding: 24px 8px;
+    font-size: 20px;
+  }
+}
+
+.sidenav-toggle {
+  padding: 0;
+  margin: 8px;
+  min-width: 64px;
+  display: none;
+  @media (max-width: $small-breakpoint-width) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  mat-icon {
+    font-size: 30px;
+    height: 64px;
+    width: 64px;
+    line-height: 64px;
+    color: white;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+}
+
+.app-content {
+  position: relative;
+  min-height: 500px;
+  padding: 5px 25px 72px;
+}
+
+.app-navbar-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  height: 53px;
+  // padding: 8px 16px;
+  flex: 1 1 70%;
+
+  > .mat-button {
+    &:last-child {
+      margin-left: auto;
+    }
+  }
+}
+
+.flex-spacer {
+  flex-grow: 1;
+}
+
+.app-navbar-link {
+  text-decoration: inherit;
+  flex: 1;
+}
+
+.app-navbar {
+  display: none;
+}
+
+.app-navbar-show-small {
+  display: none;
+}
+
+/**
+  * Rules for when the device is detected to be a small screen.
+  * Moves content two rows instead of one.
+  */
+@media (max-width: 720px) {
+  .app-navbar-hide-small {
+    display: none;
+  }
+
+  .app-navbar-show-small {
+    display: block;
+  }
+
+  .app-navbar {
+    display: flex;
+  }
+}
+
+.main-content {
+  padding: 15px 10px 50px 10px;
+  flex: 1;
+}
+
+.mat-icon {
+  //margin-right: 10px;
+  vertical-align: middle;
+}
+
+.app-footer {
+  z-index: 2;
+  padding: 10px;
+  background-color: #003865;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
+
+.app-footer-list {
+  align-items: center;
+}
+
+.app-footer-list p {
+  font-size: 14px;
+  color: white;
+  padding-top: 2px;
+  padding-left: 25px;
+  margin: 12px;
+}
+
+.app-footer-logo {
+  height: 25px;
+  float: left;
+}
+
+MyDO-app-component {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+MyDO-app-component > MyDO-app-layout {
+  flex: 1;
+}
+
+@media (max-width: 720px) {
+  MyDO-app-component {
+    top: 92px;
+  }
+}
+
+button {
+  text-transform: uppercase;
+}
+
+app-index {
+  width: 100%;
+  height: 100%;
+}
+
+section h2 {
+  padding-top: 1.5em;
+  padding-bottom: 0.5em;
+}
+
+section:first-child h2 {
+  padding-top: 0;
+  padding-bottom: 0.5em;
+}
+
+section h3 {
+  padding-top: 1.5em;
+  padding-bottom: 0.5em;
+}
+
+section:first-child h3 {
+  padding-top: 0;
+  padding-bottom: 0.5em;
+}
+
+section h4 {
+  padding-top: 1.5em;
+  padding-bottom: 0.5em;
+}
+
+section:first-child h4 {
+  padding-top: 0;
+  padding-bottom: 0.5em;
+}
+
+table {
+  width: 100%;
+}
+
+.default-icon {
+  padding: 0 14px;
+}
+
+mat-icon {
+  padding: 0 14px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.form-container {
+  @include mat-elevation(1);
+  display: flex;
+  flex-direction: column;
+  background: white;
+  transition: box-shadow 280ms cubic-bezier(.4,0,.2,1);
+  position: relative;
+  padding: 24px;
+  border-radius: 2px;
+}
+
+.form-container > * {
+  width: 100%;
+}
+
+mat-form-field.mat-form-field {
+  width: 100%;
+}
+
+.flex-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+small {
+  color: rgba(0, 0, 0, 0.54);
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.button-row-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+.button-row-right > button {
+  margin-right: 8px;
+}
+.button-row-right > button:last-child, a:last-child{
+  margin-right: inherit;
+}
+.button-error-right{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.button-row > button {
+  margin-right: 8px;
+}
+.button-row > button:last-child, a:last-child{
+  margin-right: inherit;
+}
+
+.breadcrumb {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.breadcrumb a {
+  font-size: 12px;
+  font-weight: 500;
+  margin-right: 0;
+}
+
+.help-icon {
+  padding: 0 0 0 5px;
+  margin: 0;
+  color: #003b6e;
+}
+
+.white-toolbar {
+  @include mat-elevation(1);
+  background-color: white;
+}
+
+.white-toolbar {
+  @include mat-elevation(1);
+  background-color: white;
+}
+
+
+//
+//.snackbar-success {
+//  background-color: $accent;
+//  color: black;
+//}
+//
+//.snackbar-success button {
+//  color: white;
+//}
+//
+//.snackbar-warn {
+//  background-color: $warn;
+//}
+//
+//.snackbar-error {
+//  background-color: $error;
+//}
+//
+//.snackbar-warn button {
+//  color: white;
+//}
+//
+//.bg-white {
+//  background-color: white;
+//}
+//
+//.white-toolbar {
+//  @include mat-elevation(1);
+//  background-color: white;
+//}
+//
+//.default-toolbar {
+//  @include mat-elevation(1);
+//  background-color: whitesmoke;
+//}
+
+.highlight{
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+.mat-form-field.app-input-no-underline .mat-input-underline {
+  display: none;
+}
+
+.search-box {
+  @include mat-elevation(1);
+  background-color: white;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  padding-left: 24px;
+  font-size: 20px;
+}
+
+.search-box mat-icon {
+  padding-bottom: 10px
+}
+
+.half-form-field {
+  min-width: 150px;
+  max-width: 500px;
+  width: 50%;
+}
+
+.quarter-form-field {
+  min-width: 150px;
+  max-width: 250px;
+  width: 25%;
+}
+
+
+.loading-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 56px;
+  right: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.stacked-radio-group {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.stacked-radio-button {
+  margin: 5px;
+}
+progress::-webkit-progress-value {
+  transition: width 0.1s ease;
+}
+
+img {
+  width: 250px
+}
+
+a {
+  text-decoration: none;
+  color: #3f51b5;
+}

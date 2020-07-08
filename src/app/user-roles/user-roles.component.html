@@ -1,0 +1,96 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <app-user-role-breadcrumb></app-user-role-breadcrumb>
+    <span class="spacer"></span>
+    <button mat-raised-button color="primary" routerLink="/user-roles/new">New User Role</button>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="loading-shade" *ngIf="isLoadingResults">
+  <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+</div>
+<mat-card>
+  <mat-card-content>
+    <mat-table [dataSource]="dataSource" matSort matSortActive="name" matSortDisableClear matSortDirection="asc">
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+        <mat-cell *matCellDef="let row" (click)="gotoDetail(row)">{{ row.name }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+        <mat-cell *matCellDef="let row" (click)="gotoDetail(row)">{{ row.description }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="systemRole">
+        <mat-header-cell *matHeaderCellDef>System Role</mat-header-cell>
+        <mat-cell *matCellDef="let row" (click)="gotoDetail(row)">
+          <ng-container *ngIf="row.systemRole">
+            <mat-icon class="icon-success">check</mat-icon>
+          </ng-container>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef>Active</mat-header-cell>
+        <mat-cell *matCellDef="let row" (click)="gotoDetail(row)">
+          <ng-container *ngIf="row.active">
+            <mat-icon class="icon-success">check</mat-icon>
+          </ng-container>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Created Column -->
+      <ng-container matColumnDef="updated">
+        <mat-header-cell *matHeaderCellDef
+                         mat-sort-header
+                         disableClear="true">
+          <ng-container>Created</ng-container>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row" (click)="gotoDetail(row)">{{ row.updated | date }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="menu">
+        <mat-header-cell *matHeaderCellDef
+                         mat-sort-header
+                         disableClear="true">
+          &nbsp;
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row" style="justify-content: flex-end">
+          <!-- This fills the remaining space of the current row -->
+          <mat-menu #appMenu="matMenu">
+            <button mat-menu-item (click)="gotoDetail(row)">
+              <mat-icon>account_circle</mat-icon>
+              <ng-container>View</ng-container>
+            </button>
+            <button mat-menu-item (click)="gotoEdit(row)">
+              <mat-icon>mode_edit</mat-icon>
+              <ng-container>Edit</ng-container>
+            </button>
+            <button mat-menu-item (click)="deleteUserRole(row)">
+              <mat-icon>delete</mat-icon>
+              <ng-container>Delete</ng-container>
+            </button>
+          </mat-menu>
+          <button mat-icon-button [matMenuTriggerFor]="appMenu" style="float: right">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <!--<mat-row *matRowDef="let row; columns: displayedColumns;" (click)="router.navigateByUrl('users/' + row.id)"-->
+      <!--[ngClass]="{'highlight': selectedRowIndex == row.id}"-->
+      <!--on-mouseover="highlight(row)"></mat-row>-->
+
+      <mat-row *matRowDef="let row; columns: displayedColumns;"
+               [ngClass]="{'highlight': selectedRowIndex === row.id}"
+               on-mouseover="highlight(row)"></mat-row>
+
+    </mat-table>
+    <mat-paginator #paginator
+                   [length]="resultsLength"
+                   [pageSizeOptions]="[5, 10, 25, 100]"
+                   [pageIndex]="0"
+                   [pageSize]="10">
+    </mat-paginator>
+  </mat-card-content>
+</mat-card>

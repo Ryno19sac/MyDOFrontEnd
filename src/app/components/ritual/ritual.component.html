@@ -1,0 +1,86 @@
+<mat-card id='mainTitle'>MyDO Rituals</mat-card>
+<mat-drawer-container class="sideContainer">
+    <mat-drawer class = 'homePageContents' mode="side" opened>
+        <!-- <div>
+            <button mat-stroked-button color= 'primary' class='navButton' routerLink="/birthdays" routerLinkActive="app-sidenav-item-selected">
+                Birthdays
+            </button> 
+        </div> -->
+        <div>
+            <button mat-stroked-button color= 'primary' class='navButton' routerLink="/todo" routerLinkActive="app-sidenav-item-selected">
+                Todos
+            </button> 
+        </div>
+        <!-- <div >
+            <button mat-stroked-button color='primary' class='navButton' routerLink="/stocks" routerLinkActive="app-sidenav-item-selected"> 
+                Stocks
+            </button>
+        </div> -->
+        <div >
+            <button mat-stroked-button color= 'primary' class='navButton' routerLink="/journal" routerLinkActive="app-sidenav-item-selected">
+                Journal
+            </button>
+        </div>
+        <div >
+            <button mat-stroked-button color= 'primary' 
+            (click)= 'logout()'
+            class='navButton' 
+            routerLink="/login" 
+            routerLinkActive="app-sidenav-item-selected">
+                Logout
+            </button>
+        </div>
+    </mat-drawer>
+    <mat-drawer-content class='displayComponents'>
+
+        <mat-card id='mainPage'>
+            <mat-card-title id='ritualsTitle'>Your MyDO Rituals</mat-card-title>
+            <mat-card-content>
+                <form [formGroup]="newRitual">
+                    <input type='text' class='ritual-input' placeholder="Add a Daily Ritual" formControlName="ritualTitle" >
+                    <button mat-mini-fab color="primary" (click)='addRitual()'>Add</button>
+                    <div class='ritual-item' *ngFor='let ritual of rituals' @fade>
+                            <!-- <input type='checkbox'[(ngModel)]="ritual.is_completed" > -->
+                            <div 
+                            *ngIf= '!ritual.editing; else editingRitual' class='ritual-item-label completed' 
+                            [ngClass]="{'completed' : ritual.is_completed}" 
+                            (dblclick)='editRitual(ritual)'
+                            >{{ ritual.ritualTitle }}
+                        </div>
+                        <ng-template #editingRitual>
+                            <input 
+                            type='text' 
+                            class='ritual-item-edit' 
+                            formControlName='ritualTitle' 
+                            (blur)="doneRitualEdit(ritual)" 
+                            (keyup.enter)="doneRitualEdit(ritual)" 
+                            (keyup.esc)="cancelRitualEdit(ritual)" 
+                            autofocus>
+                            <button class='updateButton' mat-mini-fab color="primary" (click)='doneEdit()'>✅</button>
+                        </ng-template>
+                        <div class= 'buttonContainer'>
+                            <div class='ritualButton'>
+                                <button 
+                                    mat-mini-fab color="primary"
+                                    class='remove-item' 
+                                    (click)='deleteRitual(ritual.id)'>
+                                    <!-- &times; -->
+                                    DONE
+                                </button>
+                            </div>
+                            <div class='ritualButton' id='xButton'>
+                                <button 
+                                mat-mini-fab color="primary"
+                                class='remove-item' 
+                                (click)='deleteRitual(ritual.id)'>
+                                ❌
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </mat-drawer-content>
+</mat-drawer-container>
+

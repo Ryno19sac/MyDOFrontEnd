@@ -1,0 +1,77 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <biblioveda-app-user-breadcrumb></biblioveda-app-user-breadcrumb>
+    <span class="spacer"></span>
+    <button mat-raised-button color="primary" routerLink="/users/new">Invite User</button>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="search-box">
+  <mat-form-field floatLabel="never" class="app-input-no-underline">
+    <mat-icon matPrefix>search</mat-icon>
+    <input matInput #searchInput placeholder="Search">
+  </mat-form-field>
+</div>
+<mat-card>
+  <div class="loading-shade" *ngIf="isLoadingResults">
+    <mat-spinner></mat-spinner>
+  </div>
+  <mat-card-content>
+    <table mat-table [dataSource]="dataSource" matSort aria-label="users">
+      <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>First Name</th>
+        <td mat-cell *matCellDef="let user" (click)="gotoDetail(user)">{{ user.firstName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</th>
+        <td mat-cell *matCellDef="let user" (click)="gotoDetail(user)">{{ user.lastName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+        <td mat-cell *matCellDef="let user" (click)="gotoDetail(user)">{{ user.email }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>User Role</th>
+        <td mat-cell *matCellDef="let user" (click)="gotoDetail(user)">{{ user.userRole?.name }}</td>
+      </ng-container>
+
+      <!-- menu -->
+      <ng-container matColumnDef="menu">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let user">
+          <!-- This fills the remaining space of the current row -->
+          <mat-menu #appMenu="matMenu">
+            <button mat-menu-item (click)="gotoDetail(user)" *ngIf="authService.hasPermission('hasUserView')">
+              <mat-icon>account_circle</mat-icon>
+              <ng-container>View</ng-container>
+            </button>
+            <button mat-menu-item (click)="gotoEdit(user)" *ngIf="authService.hasPermission('hasUserEdit')">
+              <mat-icon>mode_edit</mat-icon>
+              <ng-container i18n="@@shared_edit">Edit</ng-container>
+            </button>
+            <button mat-menu-item (click)="deleteUser(user)" *ngIf="authService.hasPermission('hasUserDelete')">
+              <mat-icon>delete</mat-icon>
+              <ng-container i18n="@@shared_delete">Delete</ng-container>
+            </button>
+          </mat-menu>
+          <button mat-icon-button [matMenuTriggerFor]="appMenu" style="float: right">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let user; columns: displayedColumns;"
+          [ngClass]="{highlight: isHighlighted(user)}"
+          on-mouseover="highlight(user)"></tr>
+    </table>
+
+    <mat-paginator [length]="resultsLength"
+                   [pageIndex]="0"
+                   [pageSize]="10"
+                   [pageSizeOptions]="[10, 25, 50, 100, 250]">
+    </mat-paginator>
+  </mat-card-content>
+</mat-card>

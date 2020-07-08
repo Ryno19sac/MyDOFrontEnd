@@ -1,0 +1,36 @@
+<mat-card class='signInCard'>
+  <form [formGroup]="loginForm" novalidate>
+    <mat-card-header id='mainTitle'>
+      <mat-card-title >
+        <h2>Sign in to your MyDO account</h2>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content id='loginContent'>
+      <div *ngIf="loginFailed">
+        <mat-error>Invalid username / password. Please try again.</mat-error>
+        <br>
+      </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" required>
+        <mat-error *ngIf="loginForm.get('email').hasError('email')">
+          <ng-container>Please enter a valid email address</ng-container>
+        </mat-error>
+        <mat-error *ngIf="loginForm.get('email').hasError('required')">
+          <ng-container>Email is required</ng-container>
+        </mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" required>
+        <mat-error *ngIf="loginForm.get('password').invalid">Password is required</mat-error>
+      </mat-form-field>
+    </mat-card-content>
+    <mat-card-actions align="end" style="margin-bottom: 0px;">
+      <a mat-button routerLink="/register">Don't have a login?</a>
+      <button mat-raised-button color="primary" [disabled]="loginForm.invalid" (click)="login()">Sign In</button>
+    </mat-card-actions>
+    <br>
+  </form>
+</mat-card>

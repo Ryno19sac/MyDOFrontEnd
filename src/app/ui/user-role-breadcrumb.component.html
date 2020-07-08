@@ -1,0 +1,5 @@
+<span class="breadcrumb">
+  <ng-container><a routerLink="/user-roles">User Roles</a></ng-container>
+  <ng-container *ngIf="userRole"> / <a routerLink="/user-roles/{{ userRole?.id }}" class="name">{{ userRole?.name }}</a></ng-container>
+  <ng-container *ngIf="title"> / {{ title }}</ng-container>
+</span>
