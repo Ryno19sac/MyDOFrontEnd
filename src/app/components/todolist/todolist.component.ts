@@ -71,13 +71,13 @@ export class TodolistComponent implements OnInit {
     this.todoTitle = '';
     this.todos = [
       
-      {
-        'user_id': 1,
-        'id': 1,
-        'title': 'learn angular',
-        'is_completed': false,
-        'editing': false
-      },
+      // {
+      //   'user_id': 1,
+      //   'id': 1,
+      //   'title': 'learn angular',
+      //   'is_completed': false,
+      //   'editing': false
+      // },
      
     ];
     this.getTodos()
@@ -94,13 +94,10 @@ export class TodolistComponent implements OnInit {
   addTodo(): void {
     if(this.todoTitle !== null) {
     }
-    // this.idForTodo++;
     const formModel = this.newTodo.value;
     const saveTodo = this.todo = {
       title: formModel.todoTitle
-      // idForTodo: todo.id
     }
-    // this.totalAngularPackages = data.total )
     this.todoService.register(saveTodo).subscribe(
       (response: Todo) => {
         this.todos.push({
@@ -114,6 +111,7 @@ export class TodolistComponent implements OnInit {
           duration: this.environment.snackBarTimeout
         });
       }) 
+      this.newTodo.reset()
     }
   logout(): void {
     this.authService.logout();

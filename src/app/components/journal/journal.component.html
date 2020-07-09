@@ -55,7 +55,7 @@
           <mat-datepicker #picker></mat-datepicker> -->
         </mat-form-field>
         
-        <mat-form-field class="journalEntry">
+        <mat-form-field class="journalInput">
           <mat-label>What's on your mind</mat-label>
           <textarea formControlName='entry' matInput placeholder="Ex. It makes me feel..."></textarea>
         </mat-form-field>
@@ -63,9 +63,31 @@
       <button (click)='addEntry()' mat-raised-button color="primary">Add Entry</button>
     </mat-card-content>
     </mat-card>
-    <mat-card *ngFor='let entry of addEntry()'>
-      <h3>{{entry}}</h3>
-      <!-- <p>{{entry.entry}}</p> -->
+    <div *ngFor='let entry of entries'>
+      <mat-card id='newJournalEntry'>
+        <h3 id='entryDate'>{{entry.entryDate}}</h3>
+        <p id='entryContent'>{{entry.entry}}</p>
+        <div class='ritualButton' id='xButton'>
+          <button 
+          mat-mini-fab color="primary"
+          class='remove-item' 
+          (click)='deleteEntry(entry.id)'>
+          ❌
+          </button>
+      </div>
+        </mat-card>
+    </div> 
+    <mat-card id='topJournalEntry'>
+      <!-- <mat-card-content>
+        <h3>07/01/2020</h3>
+        <p>Working with routes in angular is a bit confusing but it is starting to make a bit more sense</p>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class='journalEntry'>
+      <mat-card-content>
+        <h3>07/05/2020</h3>
+        <p>I hate fireworks until 3 in the morning, hopefully that stops!</p>
+      </mat-card-content> -->
     </mat-card>
     </mat-drawer-content>
     </mat-drawer-container>

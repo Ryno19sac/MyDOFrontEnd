@@ -82,8 +82,9 @@ export class JournalComponent implements OnInit {
       }
       this.journalService.register(saveEntry).subscribe(
         (response: Journal) => {
+          console.log('this is', response)
             this.entries.push({
-              id: response.id,
+              // id: response.id,
               entry: response.entry,
               entryDate: response.entryDate
             })
@@ -99,5 +100,16 @@ export class JournalComponent implements OnInit {
   }
   logout(): void {
     this.authService.logout();
+  }
+
+  deleteEntry(id: number): void {
+    this.entries = this.entries.filter(entry => entry.id !== id);
+    this.journalService.deleteEntry(id).subscribe();
+    this.snackBar.open('Journal Entry deleted', null, {
+      panelClass: ['snackbar-warn'],
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      duration: this.environment.snackBarTimeout
+    })
   }
 }

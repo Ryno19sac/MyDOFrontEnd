@@ -115,15 +115,8 @@ export class RitualComponent implements OnInit {
           })
         }
       )
+        this.newRitual.reset()
   }
-
-  // ritualsFiltered(){
-
-  // }
-
-  // editingRitual(){
-
-  // }
 
   editRitual(ritual: Ritual): void {
     this.beforeRitualEdit = ritual.ritualTitle
@@ -137,9 +130,6 @@ export class RitualComponent implements OnInit {
     ritual.editing = false;
   }
 
-  // cancelRitualEdit(ritual: Ritual): void {
-
-  // }
 
   deleteRitual(id: number): void {
     console.log('begin delete ritual')
@@ -147,6 +137,18 @@ export class RitualComponent implements OnInit {
     this.ritualService.deleteRitual(id).subscribe();
     this.snackBar.open('Ritual permanently deleted', null, {
       panelClass: ['snackbar-warn'],
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      duration: this.environment.snackBarTimeout
+    })
+  }
+
+  dayDeleteRitual(id: number): void {
+    console.log('begin delete ritual')
+    this.rituals = this.rituals.filter(ritual => ritual.id !== id)
+    this.ritualService.deleteRitual(id).subscribe();
+    this.snackBar.open('Nice, see you tomorrow!', null, {
+      panelClass: ['snackbar-success'],
       horizontalPosition: 'center',
       verticalPosition: 'top',
       duration: this.environment.snackBarTimeout

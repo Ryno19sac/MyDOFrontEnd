@@ -30,6 +30,10 @@ export class JournalService {
                 tap(_ => console.log('fetched entries')),
                 catchError(error => observableThrowError(error))
             );
-        
+    }
+
+    deleteEntry(id: number): Observable<{}> {
+        const url = `${this.environment.apiUrl}/journals/${id}`;
+        return this.http.delete(url)
     }
 }
